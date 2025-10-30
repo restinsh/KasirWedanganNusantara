@@ -7,69 +7,77 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 <style>
   body {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(145deg, #d7d7d7, #c4c4c4); /* abu lembut */
-    color: #333;
-    font-family: 'Poppins', sans-serif;
-  }
+    margin:0;
+    padding:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family: Arial, sans-serif;
 
-  .container {
+    /* Background cover dengan overlay gelap */
+    background: 
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url('admin/kk.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.container {
+    width: 450px;
+    padding: 40px 30px;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.3);
     text-align: center;
-    background: rgba(255, 255, 255, 0.85);
-    padding: 50px 60px;
-    border-radius: 20px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 1.2s ease;
-  }
+    color: #fff;
+}
 
-  .container img {
-    width: 130px;
+.container img {
+    width: 180px; /* diperbesar */
     height: auto;
     margin-bottom: 20px;
     filter: drop-shadow(0 0 8px rgba(255, 200, 0, 0.6));
-  }
+}
 
-  h1 {
+h1 {
     font-size: 32px;
     margin-bottom: 10px;
-    background: linear-gradient(90deg, #ff7a18, #af002d 70%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  }
+    background: linear-gradient(90deg, #000000ff, #555555ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
-  p {
-    color: #555;
-    font-size: 16px;
+.text-gradient {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.4;
     margin-bottom: 30px;
-  }
+    background: linear-gradient(90deg, #cccccc, #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+    text-align: center;
+}
 
-  a {
+a.button {
     display: inline-block;
     text-decoration: none;
-    background: linear-gradient(45deg, #393E46,);
-    color: #000;
-    padding: 10px 25px;
+    background: #555; /* abu-abu */
+    color: #fff;      /* teks putih */
+    padding: 12px 30px;
     border-radius: 50px;
     font-weight: 600;
     box-shadow: 0 3px 10px rgba(0,0,0,0.2);
     transition: 0.3s;
-  }
+    margin-top: 20px;
+}
 
-  a:hover {
+a.button:hover {
+    background: #777; /* abu-abu lebih terang saat hover */
     transform: scale(1.05);
-    box-shadow: 0 4px 14px rgba(0,0,0,0.3);
-  }
-
-  @keyframes fadeIn {
-    from {opacity: 0; transform: translateY(-20px);}
-    to {opacity: 1; transform: translateY(0);}
-  }
+    box-shadow: 0 4px 14px rgba(14, 14, 14, 0.3);
+}
 </style>
 </head>
 <body>
@@ -77,8 +85,9 @@
 <div class="container">
   <img src="admin/g.png" alt="Logo Resti Wedangan">
   <h1>Selamat Datang</h1>
-  <p>di Sistem Kasir <strong>Resti Wedangan</strong><br>Tempat nikmatnya rasa dan pelayanan hangat </p>
-  <a href="login_admin.php">Masuk ke Login Admin</a>
+  <p class="text-gradient">di Sistem Kasir <strong>Resti Wedangan</strong><br>Tempat nikmatnya rasa dan pelayanan hangat</p>
+  <!-- Button dipindah ke dalam container -->
+  <a href="login_admin.php" class="button">Masuk ke Login Admin</a>
 </div>
 
 </body>

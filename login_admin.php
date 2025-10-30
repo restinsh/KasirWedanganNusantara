@@ -2,8 +2,6 @@
 session_start();
 include "koneksi.php";
 
-// pastikan tidak ada spasi/echo sebelum session_start
-
 if(isset($_POST['login'])){
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -17,7 +15,6 @@ if(isset($_POST['login'])){
             $_SESSION['nama'] = $data['nama_lengkap'];
             $_SESSION['level'] = $data['level'];
 
-            // redirect aman pakai JS
             if($data['level'] == 'admin'){
                 echo "<script>window.location.href='admin/dashboard.php';</script>";
                 exit();
@@ -42,29 +39,102 @@ if(isset($_POST['login'])){
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
 body {
-   background: linear-gradient(145deg, #d7d7d7, #c4c4c4); 
-    display:flex; 
-    justify-content:center; 
-    align-items:center; 
-    height:100vh; 
+    margin:0;
+    padding:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family: Arial, sans-serif;
+
+    /* Background cover dengan overlay gelap */
+    background: 
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url('admin/kk.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
-.card-login { 
-    width:350px; 
-    padding:20px; 
-    background:#dee2e6; 
-    border-radius:15px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.2); }
+
+/* Card login dengan blur */
+.card-login {
+    width: 350px;
+    padding: 30px 20px;
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    text-align: center;
+    color: #fff;
+}
+
+/* Logo */
+.card-login img {
+    width: 80px;
+    display: block;
+    margin: 0 auto 10px auto;
+}
+
+/* Nama toko */
+.card-login h4 {
+    font-size: 16px;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+/* Judul login */
+.card-login h3 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Input form */
+.card-login .form-control {
+    border-radius: 10px;
+    border: none;
+    padding: 12px;
+    margin-bottom: 15px;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+}
+.card-login .form-control::placeholder {
+    color: #e0e0e0;
+}
+
+/* Tombol login abu-abu */
+.card-login .btn {
+    border-radius: 10px;
+    background: #555;
+    border: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+.card-login .btn:hover {
+    background: #777;
+}
+
+/* Alert error */
+.card-login .alert {
+    font-size: 14px;
+    background: rgba(255,0,0,0.7);
+    border: none;
+    color: #fff;
+}
 </style>
 </head>
 <body>
 
 <div class="card card-login">
-    <h3 class="text-center mb-3">Login Admin</h3>
+    <!-- Logo -->
+    <img src="admin/g.png" alt="Logo Resti Wedangan">
+    <!-- Nama Toko -->
+    <h4>Resti Wedangan</h4>
+
+    <h3>Login Admin</h3>
     <?php if(isset($error)){ echo "<div class='alert alert-danger'>$error</div>"; } ?>
     <form method="POST">
-        <div class="mb-3"><input type="text" name="username" class="form-control" placeholder="Username" required></div>
-        <div class="mb-3"><input type="password" name="password" class="form-control" placeholder="Password" required></div>
-        <button name="login" class="btn btn-secondary w-100">Masuk</button>
+        <input type="text" name="username" class="form-control" placeholder="Username" required>
+        <input type="password" name="password" class="form-control" placeholder="Password" required>
+        <button name="login" class="btn w-100">Masuk</button>
     </form>
 </div>
 

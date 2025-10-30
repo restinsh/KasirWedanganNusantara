@@ -7,6 +7,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 
 <div class="d-flex flex-column flex-shrink-0 p-3 bg-dark text-white position-fixed shadow-lg"
      style="width: 250px; height: 100vh; left: 0; top: 0;">
+
   <!-- Judul / Brand -->
   <div class="text-center mb-4">
     <img src="http://localhost/KasirWedanganNusantara/admin/g.png" alt=""
@@ -31,7 +32,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <li class="nav-item">
       <a href="http://localhost/KasirWedanganNusantara/admin/produk/kelola_produk.php"
          class="nav-link text-white <?= $current_page == 'kelola_produk.php' ? 'active bg-secondary' : ''; ?>">
-       <i class="bi bi-basket"></i> Produk/Menu
+        <i class="bi bi-basket"></i> Produk/Menu
       </a>
     </li>
 
@@ -48,23 +49,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <i class="bi bi-journal-text"></i> Laporan
       </a>
     </li>
-
-    <!-- Tambahan: Menu Admin -->
-    <li class="nav-item">
-      <a href="http://localhost/KasirWedanganNusantara/admin/kelola_admin.php"
-         class="nav-link text-white <?= $current_page == 'kelola_admin.php' ? 'active bg-secondary' : ''; ?>">
-       <i class="bi bi-person-workspace"></i> Kelola Admin
-      </a>
-    </li>
   </ul>
 
-  
-
-  <!-- Profil & Logout -->
-  <div class="mt-auto">
-    <div class="mb-2">
-      <small> <?= isset($_SESSION['nama']) ? htmlspecialchars($_SESSION['nama']) : '' ?></small>
-    </div>
+  <!-- Profil & Logout (tetap di bawah sidebar) -->
+  <div class="">
     <a href="../logout.php" class="btn btn-outline-danger w-100">
       <i class="bi bi-box-arrow-right me-2"></i> Logout
     </a>

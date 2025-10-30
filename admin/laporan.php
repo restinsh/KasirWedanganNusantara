@@ -11,14 +11,20 @@ include 'sidebar.php';
 $from = $_GET['from'] ?? '';
 $to = $_GET['to'] ?? '';
 
-// Hitung total pendapatan
-$sqlTotal = "SELECT COALESCE(SUM(total_harga), 0) AS total_pendapatan FROM transaksi WHERE 1";
+// ===================== TOTAL PENDAPATAN =====================
+$sqlTotal = "SELECT 
+                COALESCE(SUM(total_harga), 0) AS total_pendapatan,
+                COUNT(id_transaksi) AS total_transaksi
+              FROM transaksi 
+              WHERE 1";
 if ($from && $to) {
   $sqlTotal .= " AND DATE(tgl_transaksi) BETWEEN '$from' AND '$to'";
 }
-$total = mysqli_fetch_assoc(mysqli_query($koneksi, $sqlTotal))['total_pendapatan'];
+$dataTotal = mysqli_fetch_assoc(mysqli_query($koneksi, $sqlTotal));
+$totalPendapatan = $dataTotal['total_pendapatan'];
+$totalTransaksi  = $dataTotal['total_transaksi'];
 
-// Ambil daftar transaksi
+// ===================== AMBIL DAFTAR TRANSAKSI =====================
 $sql = "SELECT t.*, u.username 
         FROM transaksi t 
         LEFT JOIN user u ON t.id_user = u.id_user 
@@ -61,7 +67,7 @@ body {
 </head>
 <body>
 <div style="margin-left:260px; padding:20px">
-  <h4 class="mb-3"> Laporan Transaksi</h4>
+  <h4 class="mb-3">Laporan Transaksi</h4>
 
   <!-- Filter tanggal -->
   <form class="row g-2 mb-4" method="GET">
@@ -77,18 +83,21 @@ body {
       <button class="btn btn-primary w-100">Tampilkan</button>
     </div>
     <div class="col-md-3 d-flex align-items-end">
-      <button type="button" class="btn btn-success w-100" onclick="printLaporan()"> Cetak Laporan</button>
+      <button type="button" class="btn btn-success w-100" onclick="printLaporan()">Cetak Laporan</button>
     </div>
   </form>
 
   <!-- Area yang akan dicetak -->
   <div id="print-area">
+    <div class="alert alert-info">
+      <strong>Total Transaksi:</strong> <?= number_format($totalTransaksi, 0, ',', '.') ?> transaksi
+    </div>
     <div class="alert alert-success">
-      <strong>Total Pendapatan:</strong> Rp <?= number_format($total, 0, ',', '.') ?>
+      <strong>Total Pendapatan:</strong> Rp <?= number_format($totalPendapatan, 0, ',', '.') ?>
     </div>
 
     <div class="card p-3 shadow-sm">
-      <div class="table-responsive">
+      <div class="">
         <table class="table table-bordered table-striped align-middle">
           <thead class="table-dark text-center">
             <tr>
@@ -121,7 +130,7 @@ body {
                     <span class="badge bg-success">Sudah Disimpan</span>
                   <?php else: ?>
                     <a href="cetak_struk.php?id=<?= $r['id_transaksi'] ?>" class="btn btn-outline-primary btn-sm">
-                      lihat  Struk
+                      Lihat Struk
                     </a>
                   <?php endif; ?>
                 </td>

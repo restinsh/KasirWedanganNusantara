@@ -127,11 +127,9 @@ body {
               </table>
             </div>
 
-            <div class="mt-3">
-              <label class="form-label">Metode Pembayaran</label>
-              <select name="metode_pembayaran" class="form-select" required>
-                <option value="Tunai">Tunai</option>
-              </select>
+           <div class="mt-3">
+              <label class="form-label">Metode pembayaran</label>
+              <input type="text" name="metode_pembayaran" id="metode_pembayaran" class="form-control" required>
             </div>
 
             <div class="mt-3">
